@@ -4,6 +4,8 @@ rsnapshot:
   volumes:
     - redmine-mikroways-files:/tmp
     - rsnapshot-keys:/root/.ssh
+    - rsnapshot:/etc
+    #- rsnapshot-config:/etc/
+    #- rsnapshot-otroconfig:/usr/bin/rsnapshot.d
   environment:
-    SNAPSHOT_ROOT: /snapshots/
-    BACKUP_DIRECTORIES: 'root@104.131.23.223:/var/lib/docker/volumes/redmine-mikroways/_data/   ./'
+    BACKUP_DIRECTORIES: 'root@104.131.23.223:/tmp/ ./README.md'
