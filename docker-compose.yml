@@ -1,9 +1,9 @@
 rsnapshot:
   container_name: rsnapshot
-  build: .
+  image: gafonso21/docker-rsnapshot
   volumes:
     - redmine-mikroways-files:/tmp
     - rsnapshot-keys:/root/.ssh
   environment:
     SNAPSHOT_ROOT: /snapshots/
-    BACKUP_DIRECTORIES: 'root@104.131.23.223:/var/lib/docker/volumes/redmine-mikroways/_data/ ./'
+    BACKUP_DIRECTORIES: 'root@104.131.23.223:/var/lib/docker/volumes/redmine-mikroways/_data/   ./'
