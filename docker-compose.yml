@@ -5,7 +5,8 @@ rsnapshot:
     - redmine-mikroways-files:/tmp
     - rsnapshot-keys:/root/.ssh
     - rsnapshot:/etc
+    - buckppp:/snapshots
     #- rsnapshot-config:/etc/
     #- rsnapshot-otroconfig:/usr/bin/rsnapshot.d
   environment:
-    BACKUP_DIRECTORIES: 'root@104.131.23.223:/tmp/ ./README.md'
+    BACKUP_DIRECTORIES: '/tmp root@104.131.23.223:/tmp/'
