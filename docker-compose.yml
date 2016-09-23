@@ -1,13 +1,13 @@
 rsnapshot:
   container_name: rsnapshot
-  image: gafonso21/rsnapshot
+  image: gafonso21/docker-rsnapshot
+  #build: .
   volumes:
     - redmine-mikroways-files:/opt/applications/redmine #volumen con los datos que se deseen copiar
     - rsnapshot-keys:/root/.ssh #Volumen con las claves ssh
     - rnapshots-bkp:/var/rsnapshot #Volumen que contiene los bkps
   environment:
     BACKUP_DIRECTORIES: |
-                 /opt/applications/redmine	./
                  /docker-entrypoint.sh	./
     PUSH_BACKUP: root@104.131.23.223:/tmp/rsnapshots
   command: ["rsnapshot", "hourly"]

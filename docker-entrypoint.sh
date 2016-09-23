@@ -3,15 +3,14 @@
 # A helper script for ENTRYPOINT.
 set -e
 
+IFS=$'\n'
+for backup in $BACKUP_DIRECTORIES; do
+        echo "backup	$backup" >> /etc/rsnapshot.conf
+done
 
-/bin/sh /run-rsnapshot.sh
-
-#IFS=$'\n'
-#for backup in $BACKUP_DIRECTORIES; do
-#	echo "backup	$backup" >> /etc/rsnapshot.conf
-#done
-#
 #exec "$@"
+`rsnapshot hourly`
+#/bin/sh /run-rsnapshot.sh
 
 if [ ! -z $PUSH_BACKUP ]
 then
