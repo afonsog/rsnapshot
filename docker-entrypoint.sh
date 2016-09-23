@@ -1,31 +1,19 @@
-#!/bin/bash
+#!/bin/sh
 #
 # A helper script for ENTRYPOINT.
-
 set -e
 
-#ssh-keygen -t rsa -N "" -f /var/keys-rsnap/my.key
 
+/bin/sh /run-rsnapshot.sh
 
+#IFS=$'\n'
+#for backup in $BACKUP_DIRECTORIES; do
+#	echo "backup	$backup" >> /etc/rsnapshot.conf
+#done
+#
+#exec "$@"
 
-
-
-syslogger_tag=""
-
-if [ -n "${SYSLOGGER_TAG}" ]; then
-  syslogger_tag=" -t "${SYSLOGGER_TAG}
+if [ ! -z $PUSH_BACKUP ]
+then
+	`rsync -ar -e 'ssh -i /root/.ssh/id_rsa' /var/rsnapshot/ $PUSH_BACKUP`
 fi
-
-syslogger_command=""
-
-if [ -n "${SYSLOGGER}" ]; then
-  syslogger_command="logger "${syslogger_tag}
-fi
-
-source /usr/bin/rsnapshot.d/rsnapshot.sh
-
-if [ "$1" = 'rsnapshot' ]; then
-  exec rsnapshot $backup_interval
-fi
-
-exec "$@"

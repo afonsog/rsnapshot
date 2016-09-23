@@ -1,18 +1,12 @@
-FROM blacklabelops/rsnapshot
+FROM alpine
 MAINTAINER Gerónimo Afonso <geronimo.mikroways.net>
 
-#RUN yum install -y epel-release && \
-#    yum install -y openssh-clients openssh-server && \
-#    yum clean all && rm -rf /var/cache/yum/*
-
-COPY docker-entrypoint.sh /usr/bin/rsnapshot.d/docker-entrypoint.sh
+RUN apk add --update rsnapshot
 COPY rsnapshot.conf /etc/rsnapshot.conf
-COPY rsnapshot.conf /usr/bin/rsnapshot.d/rsnapshot.conf
-
-RUN chmod +x /usr/bin/rsnapshot.d/rsnapshot.conf
-RUN chmod +x /etc/rsnapshot.conf
-RUN chmod +x /usr/bin/rsnapshot.d/docker-entrypoint.sh
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+COPY run-rsnapshot.sh /run-rsnapshot.sh
+RUN chmod +x /run-rsnapshot.sh
+RUN chmod +x /docker-entrypoint.sh
 VOLUME /root/.ssh
-#RUN mkdir /var/keys-rsnap
-
-#VOLUME /var/keys-rsnap
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["rsnapshot hourly"]
