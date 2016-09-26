@@ -9,12 +9,12 @@ Contenedor para el uso de Rspanshots basado en Alpine. Con este se podran hacer 
 * Opcionalmente, definir una variable de entorno llamada PUSH_BACKUP. Esta sera la direccion de un servidor remoto en donde se copiaran los backups realizados por rsnapshot.
 
 # Ejemplo de uso con docker-compose:
+
 ```
 rsnapshot:
   container_name: rsnapshot
   image: gafonso21/docker-rsnapshot
   volumes:
-    - app-files:/opt/applications/app #volumen con los datos que se deseen copiar
     - rsnapshot-keys:/root/.ssh #Volumen con las claves ssh
     - rnapshots-bkp:/var/rsnapshot #Volumen que contiene los bkps
   environment:
