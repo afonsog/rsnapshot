@@ -5,9 +5,10 @@ rsnapshot:
   volumes:
     - redmine-mikroways-files:/opt/applications/redmine #volumen con los datos que se deseen copiar
     - rsnapshot-keys:/root/.ssh #Volumen con las claves ssh
-    - rnapshots-bkp:/var/rsnapshot #Volumen que contiene los bkps
+    - rsnapshots-bkp:/var/rsnapshot #Volumen que contiene los bkps
   environment:
     BACKUP_DIRECTORIES: |
                  /docker-entrypoint.sh	./
-    PUSH_BACKUP: root@104.131.23.223:/tmp/rsnapshots
-  command: ["rsnapshot", "hourly"]
+  #command: ["rsnapshot", "hourly"]
+  #command: ["rsnapshot", "daily"]
+  #command: ["rsnapshot", "weekly"]
