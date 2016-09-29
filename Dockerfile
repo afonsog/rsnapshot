@@ -1,5 +1,5 @@
 FROM alpine
-MAINTAINER Gerónimo Afonso <geronimo.mikroways.net>
+MAINTAINER Gerónimo Afonso <geronimo.afonso@mikroways.net>
 
 RUN apk add --update rsnapshot
 COPY rsnapshot.conf /etc/rsnapshot.conf
